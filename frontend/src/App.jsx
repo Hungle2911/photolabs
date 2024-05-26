@@ -18,6 +18,8 @@ const App = () => {
   return (
     <div className="App">
       <PhotoListItem props={sampleDataForPhotoListItem}/>
+      <PhotoListItem props={sampleDataForPhotoListItem}/>
+      <PhotoListItem props={sampleDataForPhotoListItem}/>
     </div>
   );
 };
