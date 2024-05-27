@@ -8,9 +8,9 @@ const sampleDataForTopicListItem = {
   label: "Nature",
 };
 
-const TopicListItem = ({title, id}) => {
+const TopicListItem = ({title}) => {
   return (
-    <div className="topic-list__item" key={id}>
+    <div className="topic-list__item" >
       <span>{title}</span>
     </div>
   );
