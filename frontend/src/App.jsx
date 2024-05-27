@@ -1,16 +1,12 @@
 import React from 'react';
 
-import PhotoList from 'components/PhotoList';
+
 import './App.scss';
-import TopicList from 'components/TopicList';
-import TopNavigation from 'components/TopNavigationBar';
+import HomeRoute from 'routes/HomeRoute';
 const App = () => {
   return (
     <div className="App">
-      <div className='home-route'>
-      <TopNavigation />
-      <PhotoList />
-      </div>  
+      <HomeRoute />
     </div>
   );
 };
