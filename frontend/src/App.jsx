@@ -7,9 +7,10 @@ import TopNavigation from 'components/TopNavigationBar';
 const App = () => {
   return (
     <div className="App">
+      <div className='home-route'>
       <TopNavigation />
-      <TopicList />
       <PhotoList />
+      </div>  
     </div>
   );
 };
