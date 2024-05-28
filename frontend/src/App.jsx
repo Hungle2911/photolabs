@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute handleDisplay={handleDisplay}/>
-      {display && <PhotoDetailsModal />}
+      {display && <PhotoDetailsModal handleDisplay={handleDisplay}/>}
     </div>
   );
 };
