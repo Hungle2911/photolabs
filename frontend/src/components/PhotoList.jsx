@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
-const PhotoList = ({photos, like, toggleLike}) => {
+const PhotoList = ({photos, like, toggleLike, handleDisplay}) => {
   return (
     <ul className="photo-list">
       {photos.map((item) => (<PhotoListItem 
@@ -13,7 +13,9 @@ const PhotoList = ({photos, like, toggleLike}) => {
           location={item.location}
           imageSource={item.urls.regular}
           username={item.user.name}
-          profile={item.user.profile}/>))}
+          profile={item.user.profile}
+          handleDisplay={handleDisplay}
+          />))}
     </ul>
   );
 };
