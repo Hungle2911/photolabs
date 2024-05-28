@@ -5,11 +5,16 @@ import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
   const [display, setDisplay] = useState(false)
-  const handleDisplay = () => {setDisplay(!display)}
+  const [selectedPic, setSelectedPic] = useState()
+  const handleDisplay = (photo) => {
+    setDisplay(!display)
+    setSelectedPic(photo)
+    console.log(photo);
+  }
   return (
     <div className="App">
       <HomeRoute handleDisplay={handleDisplay}/>
-      {display && <PhotoDetailsModal handleDisplay={handleDisplay}/>}
+      {display && <PhotoDetailsModal handleDisplay={handleDisplay} selectedPic={selectedPic}/>}
     </div>
   );
 };

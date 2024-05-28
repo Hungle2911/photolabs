@@ -7,7 +7,7 @@ const PhotoListItem = ({ id, location, imageSource, username, profile, like, tog
   return (
     <div className="photo-list__item" key={id}>
       <PhotoFavButton like={like} toggleLike={toggleLike} id={id}/>
-    <img src={imageSource} className="photo-list__image" onClick={handleDisplay}/>
+    <img src={imageSource} className="photo-list__image" onClick={()=> handleDisplay({id, location, imageSource, username, profile})}/>
     <div className="photo-list__user-details">
     <img src={profile} className="photo-list__user-profile"/>
     <div className="photo-list__user-info">
