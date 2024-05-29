@@ -4,14 +4,14 @@ import PhotoList from 'components/PhotoList';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
-const PhotoDetailsModal = ({handleDisplay, selectedPic}) => {
+const PhotoDetailsModal = ({handleDisplay, selectedPic, like, toggleLike}) => {
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={handleDisplay}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <div className="photo-details-modal__images">
-      <PhotoFavButton like={selectedPic.like} toggleLike={selectedPic.toggleLike} id={selectedPic.id}/>
+      <PhotoFavButton like={like} toggleLike={toggleLike} id={selectedPic.id}/>
         <img className="photo-details-modal__image" src={selectedPic.imageSource} alt="Image"/>
         <div className="photo-details-modal__photographer-details">
           <img className="photo-list__user-profile" src={selectedPic.profile}/>
@@ -24,9 +24,7 @@ const PhotoDetailsModal = ({handleDisplay, selectedPic}) => {
         </div>
         <p className='photo-details-modal__header'>Similar Photos</p>
       </div>
-      
-      <PhotoList like={selectedPic.like} toggleLike={selectedPic.toggleLike} photos={selectedPic.similarPhotos} />
-
+      <PhotoList like={like} toggleLike={toggleLike} photos={selectedPic.similarPhotos} />
     </div>
   )
 };
