@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-
+import React from 'react';
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
@@ -10,7 +9,8 @@ const App = () => {
     toggleLike,
     setPhotoSelected,
     onClosePhotoDetailsModal,
-    getPhotosByTopic} = useApplicationData()
+    getPhotosByTopic,
+    isLoading} = useApplicationData()
   return (
     <div className="App">
       <HomeRoute 
@@ -20,7 +20,8 @@ const App = () => {
       photos={photoData} 
       topics={topicData}
       toggleLike={toggleLike}
-      getPhotosByTopic={getPhotosByTopic}/>
+      getPhotosByTopic={getPhotosByTopic}
+      isLoading={isLoading}/>
 
       {display && 
       <PhotoDetailsModal 

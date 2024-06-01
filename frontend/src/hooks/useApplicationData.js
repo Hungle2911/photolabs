@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
 
 const INITIAL_STATE = {
   like: [],
@@ -51,6 +51,7 @@ const reducer = (state, action) => {
 };
 function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [isLoading, setIsLoading] = useState(true)
   const toggleLike = (id) => dispatch({ type: ACTIONS.TOGGLE_LIKE, payload: id });
   const setPhotoSelected = (photo) => dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
   const onClosePhotoDetailsModal = () => dispatch({ type: ACTIONS.CLOSE_PHOTO });
@@ -58,7 +59,10 @@ function useApplicationData() {
   useEffect(() => {
     fetch(`http://localhost:8001/api/photos `)
       .then(res => res.json())
-      .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
+      .then(photoData => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData })
+        setIsLoading(false)
+      });
   }, []);
   useEffect(() => {
     fetch(`http://localhost:8001/api/topics`)
@@ -68,9 +72,13 @@ function useApplicationData() {
 
   useEffect(() => {
     if (state.selectedTopic) {
+      setIsLoading(true)
       fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
         .then(res => res.json())
-        .then(photosByTopic => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photosByTopic }));
+        .then(photosByTopic => {
+          dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photosByTopic })
+          setIsLoading(false)
+        });
     }
   }, [state.selectedTopic]);
   return {
@@ -79,6 +87,7 @@ function useApplicationData() {
     setPhotoSelected,
     onClosePhotoDetailsModal,
     getPhotosByTopic,
+    isLoading
   }
 }
 

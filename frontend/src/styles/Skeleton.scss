@@ -1,0 +1,19 @@
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton.text {
+  height: 1em;
+  margin-bottom: 0.5em;
+}
+
+.skeleton.circle {
+  border-radius: 50%;
+}
+
+.skeleton.rect {
+  border-radius: 8px;
+}
+
