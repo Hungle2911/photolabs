@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   selectedPic: null,
   display: false,
   photoData: [],
-  topicData: []
+  topicData: [],
+  selectedTopic: null,
 };
 
 const ACTIONS = {
@@ -13,7 +14,8 @@ const ACTIONS = {
   SELECT_PHOTO: 'SELECT_PHOTO',
   CLOSE_PHOTO: 'CLOSE_PHOTO',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-  SET_TOPIC_DATA: 'SET_TOPIC_DATA'
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  SELECT_TOPIC: 'SELECT_TOPIC',
 };
 
 const reducer = (state, action) => {
@@ -36,7 +38,10 @@ const reducer = (state, action) => {
       return { ...state, photoData: action.payload };
 
     case ACTIONS.SET_TOPIC_DATA:
-        return { ...state, topicData: action.payload };  
+      return { ...state, topicData: action.payload };
+
+    case ACTIONS.SELECT_TOPIC:
+      return { ...state, selectedTopic: action.payload };
 
     default:
       throw new Error(
@@ -49,6 +54,7 @@ function useApplicationData() {
   const toggleLike = (id) => dispatch({ type: ACTIONS.TOGGLE_LIKE, payload: id });
   const setPhotoSelected = (photo) => dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
   const onClosePhotoDetailsModal = () => dispatch({ type: ACTIONS.CLOSE_PHOTO });
+  const getPhotosByTopic = topicId => dispatch({ type: ACTIONS.SELECT_TOPIC, payload: topicId });
   useEffect(() => {
     fetch(`http://localhost:8001/api/photos `)
       .then(res => res.json())
@@ -59,11 +65,20 @@ function useApplicationData() {
       .then(res => res.json())
       .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
   }, []);
+
+  useEffect(() => {
+    if (state.selectedTopic) {
+      fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
+        .then(res => res.json())
+        .then(photosByTopic => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photosByTopic }));
+    }
+  }, [state.selectedTopic]);
   return {
     state,
     toggleLike,
     setPhotoSelected,
-    onClosePhotoDetailsModal
+    onClosePhotoDetailsModal,
+    getPhotosByTopic,
   }
 }
 

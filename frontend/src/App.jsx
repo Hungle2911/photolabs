@@ -9,7 +9,8 @@ const App = () => {
     state: { like, selectedPic, display, photoData, topicData },
     toggleLike,
     setPhotoSelected,
-    onClosePhotoDetailsModal} = useApplicationData()
+    onClosePhotoDetailsModal,
+    getPhotosByTopic} = useApplicationData()
   return (
     <div className="App">
       <HomeRoute 
@@ -18,7 +19,8 @@ const App = () => {
       like={like} 
       photos={photoData} 
       topics={topicData}
-      toggleLike={toggleLike}/>
+      toggleLike={toggleLike}
+      getPhotosByTopic={getPhotosByTopic}/>
 
       {display && 
       <PhotoDetailsModal 
