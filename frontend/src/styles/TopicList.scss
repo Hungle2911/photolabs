@@ -5,3 +5,10 @@
   align-items: center;
   margin-right: 24px;
 }
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.icons > *:first-child {
+  margin-right: 15px; /* Adjust the value as needed */
+}

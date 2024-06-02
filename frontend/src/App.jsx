@@ -5,14 +5,15 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 const App = () => {
   const {
-    state: { like, selectedPic, display, photoData, topicData },
+    state: { like, selectedPic, display, photoData, topicData, darkMode },
     toggleLike,
     setPhotoSelected,
     onClosePhotoDetailsModal,
     getPhotosByTopic,
+    setDarkMode,
     isLoading} = useApplicationData()
   return (
-    <div className="App">
+    <div className={darkMode ? 'dark-mode App' : 'App'}>
       <HomeRoute 
       handleDisplay={setPhotoSelected} 
       closeModal={onClosePhotoDetailsModal} 
@@ -21,7 +22,9 @@ const App = () => {
       topics={topicData}
       toggleLike={toggleLike}
       getPhotosByTopic={getPhotosByTopic}
-      isLoading={isLoading}/>
+      isLoading={isLoading}
+      setDarkMode={setDarkMode}
+      darkMode={darkMode}/>
 
       {display && 
       <PhotoDetailsModal 
@@ -29,7 +32,8 @@ const App = () => {
       closeModal={onClosePhotoDetailsModal} 
       selectedPic={selectedPic} 
       like={like} 
-      toggleLike={toggleLike}/>}
+      toggleLike={toggleLike}
+      darkMode={darkMode}/>}
     </div>
   );
 };
